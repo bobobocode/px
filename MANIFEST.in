@@ -1,0 +1,7 @@
+include README.md
+
+# Include all .txt files in the docs folder
+recursive-include docs *.txt
+
+# Exclude any .pyc files
+global-exclude *.pyc
