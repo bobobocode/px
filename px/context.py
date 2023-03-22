@@ -63,20 +63,20 @@ def setup_default_process_module():
     Set the default request processing module.
     """
     global PxContext
-    from .example import process_module_example as m
+    from .example import request_process_module as m
     PxContext.request_process_module = m
 
 
-def setup_http_process_module(process_request_module):
+def setup_http_process_module(request_process_module):
     """
     Set the request processing module from the given module name.
     """
     global PxContext
     try:
-        m = importlib.import_module(process_request_module)
+        m = importlib.import_module(request_process_module)
         PxContext.request_process_module = m
     except ImportError:
-        raise ValueError('Could not import module %s.' % process_request_module)
+        raise ValueError('Could not import module %s.' % request_process_module)
 
 
 def setup_wsgi_process_module(wsgi_app_module):
