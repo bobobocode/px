@@ -67,7 +67,7 @@ def setup_default_process_module():
     PxContext.request_process_module = m
 
 
-def setup_http_process_module(request_process_module):
+def setup_request_process_module(request_process_module):
     """
     Set the request processing module from the given module name.
     """
