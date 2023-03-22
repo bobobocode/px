@@ -8,6 +8,18 @@ from .context import PxContext
 from functools import reduce
 
 
+async def filter_request_line(request_line):
+    pass
+
+
+async def filter_headers(headers):
+    pass
+
+
+async def filter_response(response):
+    return response
+
+
 async def dispatch(request_line, headers, body):
     """
     Dispatch http request by WSGI
@@ -18,7 +30,7 @@ async def dispatch(request_line, headers, body):
     def start_response(status, response_headers):
         nonlocal resp
         resp['status'] = status
-        resp['headers'] = response_headers
+        resp['headers'] = {hd[0]: hd[1] for hd in response_headers}
 
     wsgi_app = PxContext.wsgi_app
     if wsgi_app:
