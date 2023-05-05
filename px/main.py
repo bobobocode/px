@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-
 # BoBoBo
-
-import asyncio
 import argparse
-from .http_server import start_server, stop_server
+import asyncio
+
 from . import context as pxctx
+from .http_server import start_server
+from .http_server import stop_server
 
 
 def parse_args():
@@ -14,22 +14,27 @@ def parse_args():
 
     :return: An argparse.Namespace object containing the parsed arguments.
     """
-    parser = argparse.ArgumentParser(description='Start a Px server.')
+    parser = argparse.ArgumentParser(description="Start a Px server.")
 
-    parser.add_argument('-P', '--port', type=int, dest='port', default=8080,
-                        help='Port to listen on')
-    parser.add_argument('-H', '--host', dest='host', default='localhost',
-                        help='Host to listen on')
-    parser.add_argument('-c', '--conf', dest='conf_path', default=None,
-                        help='Px yaml config file')
+    parser.add_argument(
+        "-P", "--port", type=int, dest="port", default=8080, help="Port to listen on"
+    )
+    parser.add_argument(
+        "-H", "--host", dest="host", default="localhost", help="Host to listen on"
+    )
+    parser.add_argument(
+        "-c", "--conf", dest="conf_path", default=None, help="Px yaml config file"
+    )
 
     # The parameters --http and --wsgi are mutually exclusive,
     # meaning only one of them can be used at a time.
     group = parser.add_mutually_exclusive_group(required=False)
-    group.add_argument('--http', dest='request_process_module',
-                       help='module to handle HTTP requests')
-    group.add_argument('--wsgi', dest='wsgi_app_module',
-                       help='module to run a WSGI application')
+    group.add_argument(
+        "--http", dest="request_process_module", help="module to handle HTTP requests"
+    )
+    group.add_argument(
+        "--wsgi", dest="wsgi_app_module", help="module to run a WSGI application"
+    )
 
     args = parser.parse_args()
 
@@ -49,8 +54,9 @@ def bootstrap(args):
     else:
         pxctx.setup_default_process_module()
 
-    asyncio.run(start_server(args.host, args.port,
-                             pxctx.PxContext.request_process_module))
+    asyncio.run(
+        start_server(args.host, args.port, pxctx.PxContext.request_process_module)
+    )
 
 
 def main():
@@ -59,12 +65,12 @@ def main():
     """
     try:
         args = parse_args()
-        print(f'Bootstrap Px Server with args: {args}')
+        print(f"Bootstrap Px Server with args: {args}")
         bootstrap(args)
     except Exception as e:
-        print(f'Error starting server: {e}')
+        print(f"Error starting server: {e}")
         asyncio.run(stop_server())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

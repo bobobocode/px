@@ -1,6 +1,6 @@
 [run]
    source = px
    omit = px/tests/*, */__init__.py, */__main__.py, */example/*
-   
+
 [report]
 show_missing = True

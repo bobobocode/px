@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 # BoBoBo
 
 
@@ -15,22 +14,22 @@ def wsgi_app():
         environ,
         # start_response is a callback function supplied by the server
         # which takes the HTTP status and headers as arguments
-        start_response
+        start_response,
     ):
 
         # Build the response body possibly
         # using the supplied environ dictionary
-        response_body = 'Request method: %s' % environ['REQUEST_METHOD']
+        response_body = "Request method: %s" % environ["REQUEST_METHOD"]
 
         # HTTP response code and message
-        status = '200 OK'
+        status = "200 OK"
 
         # HTTP headers expected by the client
         # They must be wrapped as a list of tupled pairs:
         # [(Header name, Header value)].
         response_headers = [
-            ('Content-Type', 'text/plain'),
-            ('Content-Length', str(len(response_body)))
+            ("Content-Type", "text/plain"),
+            ("Content-Length", str(len(response_body))),
         ]
 
         # Send them to the server using the supplied function
