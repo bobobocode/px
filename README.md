@@ -3,6 +3,18 @@
 Async HTTP Server in Python, and it\`s functional.
 And it supports WSGI.
 
+## Features
+
+* High-performance asynchronous HTTP server
+* Custom HTTP processor with different phrases
+* Support for WSGI application
+
+## Installation
+
+```sh
+pip install px-server
+```
+
 ## Usage
 
 To start the server, use the following command:
